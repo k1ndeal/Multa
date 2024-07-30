@@ -64,3 +64,4 @@ Pedro.MostrarContratos();
 Console.WriteLine(Pedro);
 Pedro.PularMes(3);
 Pedro.MostrarContratos();
+Console.WriteLine("");
