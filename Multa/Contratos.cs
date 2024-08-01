@@ -6,45 +6,28 @@ using System.Threading.Tasks;
 
 namespace Multa {
     internal class Contratos {
+        
         public string Contrato { get; private set; }
-        public bool Status { get; private set; }
-        private DateTime _contratacao { get; set; }
+        public string Status { get; private set; }
+           
+        public DateTime Contratacao { get; private set; }
 
 
-        public Contratos(string contrato) {
+        public Contratos(string contrato,DateTime agora) {
             Contrato = contrato;
-            Status = true;
-            _contratacao = DateTime.Now;
+            Contratacao = agora;
         }
 
 
-        public void AtivoOuNaoAtivo(bool satus, bool Res) {
-            if (Res == true) {
-                Status = true;
-
-            }
-            else {
-                Status = false;
-            }
-
+        public void AcessoAContrat(DateTime teste) {
+         Contratacao = teste;
         }
 
 
-        //pulando mes 
-        public void PuleOMes(int? Mudar ) {
-            if (Mudar == null) {
-                _contratacao = _contratacao.AddMonths(1);
-
-            }
-            else {
-                _contratacao = _contratacao.AddMonths((int)Mudar);
-
-            }
-        }
-
+   
 
         public override string ToString() {
-            return $"{Contrato}, Contrato fechado em:{_contratacao.ToString("dd/MM/yyyy")} ";
+            return $"{Contrato}";
 
         }
 

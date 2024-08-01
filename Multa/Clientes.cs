@@ -23,37 +23,39 @@ namespace Multa {
             Contratos.Add(contratos);
         }
 
-        public void MudarStatusDevendo(bool status) {
-            if (status == true) {
-                Status = false;
-            }
-
-
-        }
-        public void MudarStatusPago(bool status) {
-            if (status == false) {
-                status = true;
-            }
-        }
-
-        public void MostrarContratos() {
+        public void verificacao(DateTime agora) {
             foreach (Contratos contratin in Contratos) {
-                Console.WriteLine(contratin);
+                if (contratin.Contratacao >= agora) {
+                    Console.WriteLine("renovar ou n renovar?");
+                    string Res = Console.ReadLine();
+                    if (Res == "s") {
+                        Console.WriteLine("quanto é 5 + 8?");
+                        int Resposta = int.Parse(Console.ReadLine());
+                        if (Resposta == 13) {
+                            contratin.AcessoAContrat(agora);
+                            Console.WriteLine($"{contratin} Contrato renovado! {contratin.Contratacao}");
+                        }
+                    }
+                    else {
+                        Contratos.Remove(contratin);
+                        Console.WriteLine("contrato removido!");
+                    }
+
+                }
             }
         }
+
+
+            public void ContratosDoCliente() {
+                foreach (Contratos contratin in Contratos) {
+                    Console.WriteLine($"{contratin} Data de Contratação: {contratin.Contratacao}");
+                }
+            }
 
         //pulando mes 
-        public void PularMes(int? mude) {
-
-            foreach (Contratos contratin in Contratos) {
-                contratin.PuleOMes(mude);
-            }
-
-
-        }
 
         public override string ToString() {
-            return $"{Cliente},{Status}";
+            return $"{Cliente}";
         }
 
 
