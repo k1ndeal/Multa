@@ -1,63 +1,100 @@
 ﻿
 
 using Multa;
+using System.ComponentModel;
+using System.Data.Common;
 using System.Globalization;
+using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 
 Console.WriteLine("-------CONTRATOS-------");
 DateTime Agora = new DateTime(2020, 03, 01);
 
 //contratos
-List<Contratos> Contrato = new List<Contratos>();
-Contrato.Add(new Contratos("moto", Agora));
-Contrato.Add(new Contratos("carro", Agora));
-Contrato.Add(new Contratos("aviao", Agora));
-Contrato.Add(new Contratos("casa", Agora));
-Contrato.Add(new Contratos("apartamento", Agora));
-Contrato.Add(new Contratos("garagem", Agora));
+List<Contratos> ContratoPrinc = new List<Contratos>();
+ContratoPrinc.Add(new Contratos("moto", Agora));
+ContratoPrinc.Add(new Contratos("carro", Agora));
+ContratoPrinc.Add(new Contratos("aviao", Agora));
+ContratoPrinc.Add(new Contratos("casa", Agora));
+ContratoPrinc.Add(new Contratos("apartamento", Agora));
+ContratoPrinc.Add(new Contratos("garagem", Agora));
 
 //cliente
 Clientes Pedro = new Clientes("Pedro", true);
 //                                                           Funcoes
-
-void EscolherContrato() {
-    //escolhendo contratos
-    Console.WriteLine("escolha um contrato:");
-    int i = 1;
-    MostrarContratos(i);
-    int N = int.Parse(Console.ReadLine()) - 1;
-
-    switch (N) {
-        case 1:
-            Pedro.AddContrato(Contrato[N]);
-            break;
-        case 2:
-            Pedro.AddContrato(Contrato[N]);
-            break;
-        case 3:
-            Pedro.AddContrato(Contrato[N]);
-            break;
-        case 4:
-            Pedro.AddContrato(Contrato[N]);
-            break;
-        case 5:
-            Pedro.AddContrato(Contrato[N]);
-            break;
-        case 6:
-            Pedro.AddContrato(Contrato[N]);
-            break;
-        default: break;
-    }
-
-}
 void MostrarContratos(int i) {
-    foreach (var contratinho in Contrato) {
+    foreach (var contratinho in ContratoPrinc) {
 
         Console.WriteLine($"({i})-{contratinho} ");
         i++;
     }
 }
+void EscolherContrato() {
+    //escolhendo contratos
+    Console.WriteLine("escolha um contrato:");
+    int i = 1;
+    MostrarContratos(i);
+    Console.WriteLine("PRESS '8' PARA SAIR");
+    int N = int.Parse(Console.ReadLine()) - 1;
+    bool VerificarContrato;
+
+    while (true) {
+        // Verifica se o contrato já existe antes de entrar no switch
+        if (N == 7) {
+            break;
+        }
+        if (Pedro.Contratos.Contains(ContratoPrinc[N])) {
+            Console.WriteLine("Este contrato já existe! Escolha outro.");
+            N = int.Parse(Console.ReadLine()) - 1;
+            continue;
+            // Continue no loop para pedir um novo contrato
+
+        }
+        else {
+            switch (N) {
+                case 0:
+
+                    VerificarContrato = Pedro.Contratos.Contains(ContratoPrinc[N]);
+                    if (VerificarContrato == false) {
+                        Pedro.AddContrato(ContratoPrinc[N]);
+                        break; // Sai do switch
+                    }
+                    else {
+                        Console.WriteLine("ja tem");
+                    }
+                    break; // Sai do switch
+                case 1:
+                    Pedro.AddContrato(ContratoPrinc[N]);
+                    break; // Sai do switch
 
 
+                case 2:
+                    Pedro.AddContrato(ContratoPrinc[N]);
+                    break; // Sai do switch
+
+                case 3:
+                    Pedro.AddContrato(ContratoPrinc[N]);
+                    break; // Sai do switch
+
+                case 4:
+                    Pedro.AddContrato(ContratoPrinc[N]);
+                    break; // Sai do switch
+                case 5:
+                    Pedro.AddContrato(ContratoPrinc[N]);
+                    break; // Sai do switch
+
+                default:
+                    break;
+            }
+            break;
+        }
+    }
+
+
+
+
+}
 
 
 while (true) {
@@ -65,30 +102,31 @@ while (true) {
 
     Console.WriteLine(Agora.ToString("dd/MM/yyyy"));
 
-   
-        Console.WriteLine("quais contratos vc quer?");
+
+    Console.WriteLine("quais contratos vc quer?");
 
 
 
 
 
-        EscolherContrato();
+    EscolherContrato();
 
-       
+
     while (true) {
-        Console.WriteLine("gostaria de fazer mais contratos este mes?(S1/N2)");
-        int N = int.Parse(Console.ReadLine());
-        if (N == 2) {
+        Console.WriteLine("gostaria de fazer mais contratos este mes?(S/N)");
+        string N = (Console.ReadLine());
+        if (N == "n") {
             Console.WriteLine($" {Pedro} Data:{Agora.ToString("dd/MM/yyyy")}");
             Pedro.ContratosDoCliente();
-
-            Agora.AddMonths(1);
+            Console.ReadLine();
+            Agora = Agora.AddMonths(1);
             break;
         }
         else {
             EscolherContrato();
         }
 
-        
+
     }
+    Console.Clear();
 }

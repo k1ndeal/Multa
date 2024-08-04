@@ -24,20 +24,21 @@ namespace Multa {
         }
 
         public void verificacao(DateTime agora) {
-            foreach (Contratos contratin in Contratos) {
-                if (contratin.Contratacao >= agora) {
-                    Console.WriteLine("renovar ou n renovar?");
+           for (int i = 0; i < Contratos.Count; i++) {
+                if (Contratos[i].Vencimento <= agora) {
+                    Console.WriteLine($"{Contratos[i]} venceu ");
+                    Console.WriteLine("renovar ou n renovar?(S/N)");
                     string Res = Console.ReadLine();
                     if (Res == "s") {
                         Console.WriteLine("quanto é 5 + 8?");
                         int Resposta = int.Parse(Console.ReadLine());
                         if (Resposta == 13) {
-                            contratin.AcessoAContrat(agora);
-                            Console.WriteLine($"{contratin} Contrato renovado! {contratin.Contratacao}");
+                            Contratos[i].MudandoData(agora);
+                            Console.WriteLine($"{Contratos[i]} Contrato renovado! {Contratos[i].Contratacao}");
                         }
                     }
                     else {
-                        Contratos.Remove(contratin);
+                        Contratos.Remove(Contratos[i]);
                         Console.WriteLine("contrato removido!");
                     }
 
@@ -48,7 +49,9 @@ namespace Multa {
 
             public void ContratosDoCliente() {
                 foreach (Contratos contratin in Contratos) {
-                    Console.WriteLine($"{contratin} Data de Contratação: {contratin.Contratacao}");
+                    Console.WriteLine($"{contratin}, " +
+                        $"Data de Contratação: {contratin.Contratacao.ToString("dd/MM/yyyy")}, " +
+                        $"Vencimento: {contratin.Vencimento.ToString("dd/MM/yyyy")}");
                 }
             }
 

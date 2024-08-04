@@ -18,10 +18,11 @@ namespace Multa {
             Contratacao = agora;
             Vencimento = agora.AddMonths(3);
         }
+       
 
-
-        public void AcessoAContrat(DateTime teste) {
+        public void MudandoData(DateTime teste) {
          Contratacao = teste;
+            Vencimento = teste.AddMonths(3);
         }
 
 
