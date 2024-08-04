@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 namespace Multa {
     internal class Contratos {
         
-        public string Contrato { get; private set; }
-        public string Status { get; private set; }
-           
+        public string Nome_Contrato { get; private set; }
+   
+        public DateTime Vencimento { get; private set; }
         public DateTime Contratacao { get; private set; }
 
 
         public Contratos(string contrato,DateTime agora) {
-            Contrato = contrato;
+            Nome_Contrato = contrato;
             Contratacao = agora;
+            Vencimento = agora.AddMonths(3);
         }
 
 
@@ -27,7 +28,7 @@ namespace Multa {
    
 
         public override string ToString() {
-            return $"{Contrato}";
+            return $"{Nome_Contrato}";
 
         }
 
