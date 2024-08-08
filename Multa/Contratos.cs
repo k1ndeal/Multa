@@ -16,7 +16,8 @@ namespace Multa {
         public Contratos(string contrato,DateTime agora) {
             Nome_Contrato = contrato;
             Contratacao = agora;
-            Vencimento = agora.AddMonths(3);
+            Vencimento = agora;
+            //Vencimento = agora.AddMonths(3);
         }
        
 

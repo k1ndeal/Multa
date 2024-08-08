@@ -13,12 +13,12 @@ DateTime Agora = new DateTime(2020, 03, 01);
 
 //contratos
 List<Contratos> ContratoPrinc = new List<Contratos>();
-ContratoPrinc.Add(new Contratos("moto", Agora));
-ContratoPrinc.Add(new Contratos("carro", Agora));
-ContratoPrinc.Add(new Contratos("aviao", Agora));
-ContratoPrinc.Add(new Contratos("casa", Agora));
-ContratoPrinc.Add(new Contratos("apartamento", Agora));
-ContratoPrinc.Add(new Contratos("garagem", Agora));
+ContratoPrinc.Add(new Contratos("Moto", Agora));
+ContratoPrinc.Add(new Contratos("Carro", Agora));
+ContratoPrinc.Add(new Contratos("Aviao", Agora));
+ContratoPrinc.Add(new Contratos("Casa", Agora));
+ContratoPrinc.Add(new Contratos("Apartamento", Agora));
+ContratoPrinc.Add(new Contratos("Garagem", Agora));
 
 //cliente
 Clientes Pedro = new Clientes("Pedro", true);
@@ -44,7 +44,7 @@ void EscolherContrato() {
         if (N == 7) {
             break;
         }
-        if (Pedro.Contratos.Contains(ContratoPrinc[N])) {
+        if (Pedro.ContratosAtivos.Contains(ContratoPrinc[N])) {
             Console.WriteLine("Este contrato já existe! Escolha outro.");
             N = int.Parse(Console.ReadLine()) - 1;
             continue;
@@ -55,7 +55,7 @@ void EscolherContrato() {
             switch (N) {
                 case 0:
 
-                    VerificarContrato = Pedro.Contratos.Contains(ContratoPrinc[N]);
+                    VerificarContrato = Pedro.ContratosAtivos.Contains(ContratoPrinc[N]);
                     if (VerificarContrato == false) {
                         Pedro.AddContrato(ContratoPrinc[N]);
                         break; // Sai do switch
@@ -98,7 +98,6 @@ void EscolherContrato() {
 
 
 while (true) {
-    Pedro.verificacao(Agora);
 
     Console.WriteLine(Agora.ToString("dd/MM/yyyy"));
 
@@ -128,5 +127,7 @@ while (true) {
 
 
     }
+    Pedro.verificacao(Agora);
+
     Console.Clear();
 }
